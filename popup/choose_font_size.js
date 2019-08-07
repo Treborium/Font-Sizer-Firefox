@@ -6,14 +6,21 @@ function listenForClicks() {
     document.addEventListener("click", (e) => {
 
         /**
+         * Removes the 'px' suffix of the available buttons
+         */
+        function removePxSuffix(text) {
+            return text.slice(0, -2);
+        }
+
+        /**
          * Insert the page-hiding CSS into the active tab,
          * then get the beast URL and
-         * send a "beastify" message to the content script in the active tab.
          */
         function changeFont(tabs) {
+            let fontSize = removePxSuffix(e.target.textContent);
             browser.tabs.sendMessage(tabs[0].id, {
                 command: "change-font",
-                size: "18"
+                size: fontSize,
             });
         }
 
@@ -26,7 +33,7 @@ function listenForClicks() {
 
         /**
          * Get the active tab,
-         * then call "beastify()" or "reset()" as appropriate.
+         * then call changeFont() or catch the error if something goes wrong.
          */
         browser.tabs.query({ active: true, currentWindow: true })
             .then(changeFont)
@@ -41,8 +48,7 @@ function listenForClicks() {
 function reportExecuteScriptError(error) {
     document.querySelector("#popup-content").classList.add("hidden");
     document.querySelector("#error-content").classList.remove("hidden");
-    console.error(`Failed to execute font_sizer content script: ${error.message}`);
-    alert("Uh Oh, Something bad happened!");
+    console.error(`Failed to execute change_font content script: ${error.message}`);
 }
 
 /**
