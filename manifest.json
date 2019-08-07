@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "Font Sizer",
+    "version": "1.0",
+    "description": "Easily change the font size of paragraphs.",
+    "icons": {
+        "48": "icons/FontSizer-Icon.png"
+    },
+    "permissions": [
+        "activeTab"
+    ],
+    "browser_action": {
+        "default_icon": "icons/FontSizer-Icon.png",
+        "default_title": "Font Sizer",
+        "default_popup": "popup/choose_font_size.html"
+    }
+}
