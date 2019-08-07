@@ -6,18 +6,11 @@ function listenForClicks() {
     document.addEventListener("click", (e) => {
 
         /**
-         * Removes the 'px' suffix of the available buttons
-         */
-        function removePxSuffix(text) {
-            return text.slice(0, -2);
-        }
-
-        /**
          * Insert the page-hiding CSS into the active tab,
          * then get the beast URL and
          */
         function changeFont(tabs) {
-            let fontSize = removePxSuffix(e.target.textContent);
+            let fontSize = e.target.textContent;
             browser.tabs.sendMessage(tabs[0].id, {
                 command: "change-font",
                 size: fontSize,
