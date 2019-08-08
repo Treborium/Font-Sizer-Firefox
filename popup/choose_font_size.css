@@ -1,6 +1,6 @@
 html {
-    width: max-content;
-    height: max-content;
+    width: 400px;
+    height: 180px;
     font-family: "Roboto";
 }
 
@@ -14,17 +14,16 @@ h3 {
     color: #999;
 }
 
-#header {
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
+#wrapper {
+    text-align: center;
 }
 
 #separator {
-    width: 100%;
+    width: 98%;
     height: 2px;
-    background: rgba(255, 255, 255, 0.4);
-    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.15);
+    margin-bottom: 10px;
+    display: inline-block;
 }
 
 button {
@@ -38,13 +37,15 @@ button {
     border: none;
     background-color: rgba(255, 255, 255, 0.0);
     margin: 2px;
-    transition: color 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    border-radius: 8px;
 }
 
 button:hover {
     cursor: pointer;
-    transition: color 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
     color: #fff;
+    background-color: rgba(255, 255, 255, 0.03);
 }
 
 #buttons {
