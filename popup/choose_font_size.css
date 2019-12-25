@@ -38,8 +38,8 @@ button {
     font-weight: 500;
 
     color: #ffffff;
-    background-color: #9050AA;
-    border-color: #9050AA;
+    background-color: #6699ff;
+    border-color: #6699ff;
     border-style: solid;
     border-width: 1px;
     border-radius: 4px;
@@ -51,7 +51,7 @@ button {
 
 button:hover {
     cursor: pointer;
-    color: #9050AA;
+    color: #6699ff;
     background-color: #fff;
 
     transition: all 0.25s ease-in-out;
