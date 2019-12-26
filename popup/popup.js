@@ -1,6 +1,6 @@
 browser.runtime.onMessage.addListener((message) => {
     switch (message.command) {
-        case 'change-element': 
+        case 'change-element':
             document.getElementById('current-element').innerText = message.tagName;
             break;
         default:
