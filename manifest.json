@@ -12,6 +12,6 @@
     "browser_action": {
         "default_icon": "icons/FontSizer-Icon.png",
         "default_title": "Font Sizer",
-        "default_popup": "popup/choose_font_size.html"
+        "default_popup": "popup/popup.html"
     }
 }
