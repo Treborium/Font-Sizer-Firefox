@@ -13,21 +13,34 @@
     }
     window.hasRun = true;
 
+    // By default only paragraphs are effected by the change
+    let affectedElements = document.querySelectorAll("p");
+
     function changeFontSize(size) {
-        console.info(`Changing the font to ${size}`);
-        let paragraphs = document.querySelectorAll("p");
-        for (let p of paragraphs) {
-            p.style.fontSize = size;
+        console.info(`Changing the font to "${size}"`);
+        for (let element of affectedElements) {
+            element.style.fontSize = size;
         }
     }
 
+
     function pickElement() {
-        console.log("Picking some element...");
+        function getElementUnderMouse(mouseEvent) {
+            tagName = document.elementFromPoint(mouseEvent.clientX, mouseEvent.clientY).tagName;
+            affectedElements = document.querySelectorAll(tagName);
+
+            // unregister listener to prevent triggering this function multiple times
+            document.removeEventListener('click', this);
+            document.documentElement.style.cursor = "";  // Reset mouse cursor style
+        }
+
+        document.addEventListener('click', getElementUnderMouse);
+        document.documentElement.style.cursor = "crosshair";
     }
 
 
     /**
-     * Listen for messages from the background script.
+     * Listen for messages from the background script or popup.
      */
     browser.runtime.onMessage.addListener((message) => {
         switch (message.command) {
