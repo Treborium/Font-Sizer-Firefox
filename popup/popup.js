@@ -43,6 +43,6 @@ function reportExecuteScriptError(error) {
  * and add a click handler.
  * If we couldn't inject the script, handle the error.
  */
-browser.tabs.executeScript({ file: "/content_scripts/change_font_size.js" })
+browser.tabs.executeScript({ file: "/content_scripts/content.js" })
     .then(listenForClicks)
     .catch(reportExecuteScriptError);
