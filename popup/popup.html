@@ -2,26 +2,31 @@
 <html>
 
 <head>
+    <meta charset="utf-8"/>
     <title>Font Sizer</title>
     <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
 
 <body>
     <div id="header">
-        <!-- <h2>Font Sizer</h2> -->
         <h3>Select Font Size</h3>
     </div>
     <div id="wrapper">
         <div id="separator"></div>
     </div>
     <div id="buttons">
-        <button id="btn-18px">18px</button>
-        <button id="btn-20px">20px</button>
-        <button id="btn-22px">22px</button>
-        <button id="btn-24px">24px</button>
+        <button class="change-font">18px</button>
+        <button class="change-font">20px</button>
+        <button class="change-font">22px</button>
+        <button class="change-font">24px</button>
     </div>
 
-    <script src="popup.js"></script>
+    <div id="pick-element-wrapper">
+        <button class="pick-element">Pick element</button>
+        <span id="tag-name">&lt;<span id="current-element"></span>&gt;</span>
+    </div>
+
+    <script type="module" src="popup.js"></script>
 </body>
 
 </html>

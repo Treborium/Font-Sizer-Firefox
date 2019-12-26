@@ -56,3 +56,25 @@ button:hover {
 
     transition: all 0.25s ease-in-out;
 }
+
+#pick-element-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.pick-element {
+    font-size: 14px;
+    width: auto;  /* Only use as much space as needed */ 
+}
+
+#tag-name {
+    font-size: 14px;
+    padding: 5px;
+    background: #d5d7d9;
+    color: #2a3a4a;
+    border-radius: 3px;
+}
