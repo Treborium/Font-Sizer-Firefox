@@ -48,7 +48,7 @@
             removeEventListeners();
             element.style.outline = "";
         }
-        
+
         function abortOnEscape(keyEvent) {
             if (keyEvent.key === "Escape") {
                 removeEventListeners();
@@ -62,7 +62,7 @@
         function resetBorder(event) {
             event.target.style.outline = "";
         }
-        
+
         function removeEventListeners() {
             // unregister listeners to prevent them from triggering multiple times
             document.removeEventListener('click', getElementUnderMouse);
@@ -71,6 +71,8 @@
             document.removeEventListener('mouseout', resetBorder);
             document.documentElement.style.cursor = '';  // Reset mouse cursor style
         }
+
+        browser.runtime.sendMessage({ 'command': 'close-window' });
 
         document.addEventListener('click', getElementUnderMouse);
         document.addEventListener('keypress', abortOnEscape);

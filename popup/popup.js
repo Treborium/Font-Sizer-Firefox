@@ -3,6 +3,9 @@ browser.runtime.onMessage.addListener((message) => {
         case 'change-element':
             document.getElementById('current-element').innerText = message.tagName;
             break;
+        case 'close-window':
+            window.close();
+            break;
         default:
             console.error(`Undefined command: "${message.command}"`);
     }
@@ -20,10 +23,6 @@ function listenForClicks() {
                 command: element.target.className,  // The class of the clicked element is the command identifier
                 textContent: element.target.textContent,  // The text content of the element is used for the new font size (i.e. 18px, 20px, etc.)
             });
-
-            if (element.target.className === "pick-element") {
-                window.close();
-            }
         }
 
         /**
