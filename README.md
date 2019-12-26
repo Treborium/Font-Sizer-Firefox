@@ -36,7 +36,7 @@ The extension can then be tested by using the following command inside the exten
 web-ext run
 ```
 
-The `run` command watches your source files and tells firefox to reload the extension whenever they change. A manual reload can be triggered by pressing the `r` key inside the terminal session where `web-ext` is running. 
+The `run` command watches your source files and tells firefox to reload the extension whenever they change. A manual reload can be triggered by pressing the `r` key inside the terminal session where `web-ext` is running.
 
 ## Package Extension
 

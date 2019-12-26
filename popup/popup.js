@@ -1,3 +1,5 @@
+
+// Handle incoming messages
 browser.runtime.onMessage.addListener((message) => {
     switch (message.command) {
         case 'change-element':
