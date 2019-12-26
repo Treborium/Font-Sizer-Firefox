@@ -9,12 +9,22 @@
      * it will do nothing next time.
      */
     if (window.hasRun) {
+        browser.runtime.sendMessage({"command": "get", "key": "currentTagName"})
+            .then((response) => {
+                browser.runtime.sendMessage({"command": "change-element", "tagName": response.value});
+            }, null);
         return;
     }
     window.hasRun = true;
 
     // By default only paragraphs are effected by the change
     let affectedElements = document.querySelectorAll("p");
+    sendMessage({"command": "update", "key": "currentTagName", "value": "p"});
+    
+    function sendMessage(msg) {
+        console.info(`Sending message with content: `, msg);
+        browser.runtime.sendMessage(msg);
+    }
 
     function changeFontSize(size) {
         console.info(`Changing the font to "${size}"`);
@@ -23,11 +33,12 @@
         }
     }
 
-
     function pickElement() {
         function getElementUnderMouse(mouseEvent) {
             tagName = document.elementFromPoint(mouseEvent.clientX, mouseEvent.clientY).tagName;
             affectedElements = document.querySelectorAll(tagName);
+
+            sendMessage({"command": "update", "key": "currentTagName", "value": tagName});
 
             // unregister listener to prevent triggering this function multiple times
             document.removeEventListener('click', this);

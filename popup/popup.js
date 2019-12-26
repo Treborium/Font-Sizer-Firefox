@@ -1,3 +1,14 @@
+browser.runtime.onMessage.addListener((message) => {
+    switch (message.command) {
+        case "change-element": 
+            document.getElementById("current-element").innerText = message.tagName;
+            break;
+        default:
+            console.error(`Undefined command: "${message.command}"`);
+    }
+});
+
+
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.

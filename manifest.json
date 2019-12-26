@@ -13,5 +13,8 @@
         "default_icon": "icons/FontSizer-Icon.png",
         "default_title": "Font Sizer",
         "default_popup": "popup/popup.html"
+    },
+    "background": {
+        "scripts": ["background_scripts/background.js"]
     }
 }
