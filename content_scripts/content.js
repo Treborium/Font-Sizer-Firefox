@@ -14,6 +14,13 @@
         return;
     }
 
+
+    function handleResponse(response) {
+        // Send popup a message to display the currently selected element
+        browser.runtime.sendMessage({ 'command': 'change-element', 'tagName': response.value });
+    }
+
+
     window.hasRun = true;
     // By default only paragraphs are effected by the change
     const DEFAULT_ELEMENT = 'p';
@@ -21,12 +28,6 @@
     let affectedElements = document.querySelectorAll(DEFAULT_ELEMENT);
     browser.runtime.sendMessage({ 'command': 'update', 'key': 'currentTagName', 'value': DEFAULT_ELEMENT });
     browser.runtime.sendMessage({ 'command': 'change-element', 'tagName': DEFAULT_ELEMENT });
-
-
-    function handleResponse(response) {
-        // Send popup window a message to display the currently selected element
-        browser.runtime.sendMessage({ 'command': 'change-element', 'tagName': response.value });
-    }
 
 
     function changeFontSize(size) {
@@ -66,17 +67,20 @@
         function removeEventListeners() {
             // unregister listeners to prevent them from triggering multiple times
             document.removeEventListener('click', getElementUnderMouse);
-            document.removeEventListener('keypress', abortOnEscape);
+            document.removeEventListener('keydown', abortOnEscape);
             document.removeEventListener('mouseover', highlightCurrentElement);
-            document.removeEventListener('mouseout', resetBorder);
             document.documentElement.style.cursor = '';  // Reset mouse cursor style
         }
 
-        browser.runtime.sendMessage({ 'command': 'close-window' });
+        browser.runtime.sendMessage({ 'command': 'close-window' });  // Tell the popup to close itself
 
         document.addEventListener('click', getElementUnderMouse);
-        document.addEventListener('keypress', abortOnEscape);
+        document.addEventListener('keydown', abortOnEscape);
         document.addEventListener('mouseover', highlightCurrentElement);
+
+        // Do NOT remove this event listener. 
+        // This prevents borders from not being removed properly
+        // e.g. when the picking process is cancelled via ESC
         document.addEventListener('mouseout', resetBorder);
         document.documentElement.style.cursor = 'crosshair';
     }
