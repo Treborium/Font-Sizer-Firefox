@@ -14,10 +14,10 @@
         return;
     }
 
-    const DEFAULT_ELEMENT = 'p';
     window.hasRun = true;
-
     // By default only paragraphs are effected by the change
+    const DEFAULT_ELEMENT = 'p';
+
     let affectedElements = document.querySelectorAll(DEFAULT_ELEMENT);
     browser.runtime.sendMessage({ 'command': 'update', 'key': 'currentTagName', 'value': DEFAULT_ELEMENT });
     browser.runtime.sendMessage({ 'command': 'change-element', 'tagName': DEFAULT_ELEMENT });
@@ -39,17 +39,43 @@
 
     function pickElement() {
         function getElementUnderMouse(mouseEvent) {
-            tagName = document.elementFromPoint(mouseEvent.clientX, mouseEvent.clientY).tagName.toLowerCase();
+            element = document.elementFromPoint(mouseEvent.clientX, mouseEvent.clientY);
+            tagName = element.tagName.toLowerCase();
             affectedElements = document.querySelectorAll(tagName);
 
             browser.runtime.sendMessage({ 'command': 'update', 'key': 'currentTagName', 'value': tagName });
 
-            // unregister listener to prevent triggering this function multiple times
-            document.removeEventListener('click', this);
+            removeEventListeners();
+            element.style.outline = "";
+        }
+        
+        function abortOnEscape(keyEvent) {
+            if (keyEvent.key === "Escape") {
+                removeEventListeners();
+            }
+        }
+
+        function highlightCurrentElement(event) {
+            event.target.style.outline = "2px solid #CC6666";
+        }
+
+        function resetBorder(event) {
+            event.target.style.outline = "";
+        }
+        
+        function removeEventListeners() {
+            // unregister listeners to prevent them from triggering multiple times
+            document.removeEventListener('click', getElementUnderMouse);
+            document.removeEventListener('keypress', abortOnEscape);
+            document.removeEventListener('mouseover', highlightCurrentElement);
+            document.removeEventListener('mouseout', resetBorder);
             document.documentElement.style.cursor = '';  // Reset mouse cursor style
         }
 
         document.addEventListener('click', getElementUnderMouse);
+        document.addEventListener('keypress', abortOnEscape);
+        document.addEventListener('mouseover', highlightCurrentElement);
+        document.addEventListener('mouseout', resetBorder);
         document.documentElement.style.cursor = 'crosshair';
     }
 

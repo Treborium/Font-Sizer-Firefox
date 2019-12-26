@@ -14,12 +14,16 @@ browser.runtime.onMessage.addListener((message) => {
  * the content script in the page.
  */
 function listenForClicks() {
-    document.addEventListener("click", (element) => {
+    document.addEventListener('click', (element) => {
         function sendMessage(tabs) {
             browser.tabs.sendMessage(tabs[0].id, {
                 command: element.target.className,  // The class of the clicked element is the command identifier
                 textContent: element.target.textContent,  // The text content of the element is used for the new font size (i.e. 18px, 20px, etc.)
             });
+
+            if (element.target.className === "pick-element") {
+                window.close();
+            }
         }
 
         /**
@@ -44,8 +48,6 @@ function listenForClicks() {
  * Display the popup's error message, and hide the normal UI.
  */
 function reportExecuteScriptError(error) {
-    // document.querySelector("#popup-content").classList.add("hidden");
-    // document.querySelector("#error-content").classList.remove("hidden");
     console.error(`Failed to execute change_font content script: ${error.message}`);
 }
 
