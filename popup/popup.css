@@ -22,6 +22,11 @@ h3 {
     display: inline-block;
 }
 
+.pick-element {
+    font-size: 14px;
+    width: auto;  /* Only use as much space as needed */ 
+}
+
 #buttons {
     height: 200px;
     display: flex;
@@ -55,4 +60,8 @@ button:hover {
     background-color: #fff;
 
     transition: all 0.25s ease-in-out;
+}
+
+#tag-name {
+    font-size: 14px;
 }
