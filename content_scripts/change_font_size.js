@@ -1,3 +1,7 @@
+/**
+ * This script loads when the popup was loaded
+ */
+
 (function() {
     /**
      * Check and set a global guard variable.

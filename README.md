@@ -1,6 +1,6 @@
 # Font Sizer
 
-A simple browser extension to easily change the current font size of a website. 
+A browser extension to easily change the current font size of a website. 
 
 <div style="text-align:center"><img src="res/img/popup.png"/></div>
 
